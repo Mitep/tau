@@ -1,0 +1,20 @@
+# SETTINGS FOR APP
+
+# directory where app will store temp album covers 
+COVER_PATH="/covers"
+
+# SETTINGS ABOUT METADATA
+
+# aac, mp3, flac, loseless, lossy
+AUDIO_FORMAT=mp3
+
+# jpg, png, bmp
+ARTWORK_IMG_FORMAT=png
+
+# height x width
+ARTWORK_RESOLUTION=800x800
+
+CORRECT_META=True
+
+LYRICS=True
+MISSING_RELEASES=False
