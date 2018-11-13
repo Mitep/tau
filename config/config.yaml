@@ -1,20 +1,19 @@
-# SETTINGS FOR APP
+# encodings: utf-8
+# audio_format: mp3, flac
+# artwork_img_format: png, jpg
 
-# directory where app will store temp album covers 
-COVER_PATH="/covers"
+PRINT_CFG:
+  lyrics: True
+  artwork: True
+  encoding: True
 
-# SETTINGS ABOUT METADATA
-
-# aac, mp3, flac, loseless, lossy
-AUDIO_FORMAT=mp3
-
-# jpg, png, bmp
-ARTWORK_IMG_FORMAT=png
-
-# height x width
-ARTWORK_RESOLUTION=800x800
-
-CORRECT_META=True
-
-LYRICS=True
-MISSING_RELEASES=False
+CALC_CFG:
+  lyrics: True
+  encoding: utf-8
+  ARTWORK:
+    artwork: True
+    artwork_width: 800
+    artwork_height: 800
+    artwork_img_format: png
+  audio_format: mp3
+  missing_releases: True
