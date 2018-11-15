@@ -7,6 +7,8 @@ COVER_PATH="/covers"
 
 # aac, mp3, flac, loseless, lossy
 AUDIO_FORMAT=mp3
+BITRATE=320 #in kbps
+ENCODING=UTF8
 
 # jpg, png, bmp
 ARTWORK_IMG_FORMAT=png
