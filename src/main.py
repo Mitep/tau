@@ -25,7 +25,6 @@ def start_worker(worker_type, config_file):
         logger.warning('No worker type ' + worker_type)
         return
 
-    data = arg_data.get_data(config)
     worker.run(data)
     
 
