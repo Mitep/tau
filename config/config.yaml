@@ -17,3 +17,13 @@ CALC_CFG:
     artwork_img_format: png
   audio_format: mp3
   missing_releases: True
+
+# ARTIST, RELEASE_TYPES, RELEASE_NAME, SONG, TRACK_NUM, TRACK_NAME, GENRE
+
+DIR_TREE:
+  dir_order:
+    - "ARTIST"
+    - "YEAR - RELEASE_NAME"
+  song_file_name: "TRACK_NUM. TRACK_NAME"
+  disable_album_type: True
+  artwork_in_album_dir: True
