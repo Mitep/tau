@@ -12,7 +12,7 @@ def start_worker(worker_type, config_file):
     logger.info('Starting TAU ...')
 
     data = conf_utils.conf_dict(config_file)
-    logger.debug(data)
+    #logger.debug(data)
 
     worker = None
     if worker_type == 'current_state':

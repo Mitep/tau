@@ -1,3 +1,4 @@
+import os
 from utils import logger_util
 
 
@@ -12,8 +13,14 @@ class CurrentState:
         # main function of a worker
         self.logger.info('Calculating current state ...')
 
+        music_dir = data['MUSIC_DIR']
+        self.logger.debug(music_dir)
 
-        self.logger.debug(data)
+        for root, dirs, files in os.walk(music_dir, topdown=True):
+            for name in files:
+                print(os.path.join(root, name))
+            for name in dirs:
+                print(os.path.join(root, name))
 
 
         self.logger.info('Calculating current state finished')
