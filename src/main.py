@@ -3,11 +3,16 @@ import os
 from workers.cur_state import CurrentState
 from workers.change_encoding import ChangeEncoding
 from utils import logger_util
-from utils import arg_data
+from utils import conf_utils
 
-def start_worker(worker_type, config):
+
+def start_worker(worker_type, config_file):
+    
     logger = logger_util.create_logger('main_logger')
     logger.info('Starting TAU ...')
+
+    data = conf_utils.conf_dict(config_file)
+    logger.debug(data)
 
     worker = None
     if worker_type == 'current_state':
@@ -22,6 +27,7 @@ def start_worker(worker_type, config):
 
     data = arg_data.get_data(config)
     worker.run(data)
+    
 
 if __name__ == '__main__':
-    start_worker('current_state', 'data_path')
+    start_worker('current_state', './config/config.yaml')

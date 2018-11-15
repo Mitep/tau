@@ -1,6 +1,8 @@
 # encodings: utf-8
 # audio_format: mp3, flac
 # artwork_img_format: png, jpg
+MUSIC_DIR: ""
+EXPORT_STATE_DIR: ""
 
 PRINT_CFG:
   lyrics: True

@@ -8,6 +8,8 @@ requests = "*"
 clint = "*"
 logger = "*"
 click = "*"
+mutagen = "*"
+pyyaml = "*"
 
 [dev-packages]
 

@@ -12,3 +12,4 @@ class CurrentState:
         self.logger.debug('Saving current state of dir into a ' + data['state_path'])
 
         self.logger.info('Calculating current state finished')
+
