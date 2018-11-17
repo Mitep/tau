@@ -1,6 +1,5 @@
-import os
 from utils import logger_util
-
+from utils import mu_dir
 
 class CurrentState:
     
@@ -16,12 +15,11 @@ class CurrentState:
         music_dir = data['MUSIC_DIR']
         self.logger.debug(music_dir)
 
-        for root, dirs, files in os.walk(music_dir, topdown=True):
-            for name in files:
-                print(os.path.join(root, name))
-            for name in dirs:
-                print(os.path.join(root, name))
+        mu_files, mu_dirs = mu_dir.get_dir_files(music_dir)
 
+        self.logger.debug("Print dirs:")
+        for dir in mu_dirs:
+            self.logger.debug(dir)
 
         self.logger.info('Calculating current state finished')
 
