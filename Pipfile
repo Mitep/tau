@@ -4,10 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "*"
-clint = "*"
 logger = "*"
-click = "*"
 mutagen = "*"
 pyyaml = "*"
 
