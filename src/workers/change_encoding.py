@@ -11,4 +11,3 @@ class ChangeEncoding:
         self.logger.debug('Encoding is ' + data['encoding'])
 
         self.logger.info('Finishes encoding')
-

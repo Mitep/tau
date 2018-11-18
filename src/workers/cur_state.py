@@ -1,5 +1,6 @@
 import os
 from utils import logger_util
+from utils import tags_util
 
 
 class CurrentState:
@@ -19,9 +20,12 @@ class CurrentState:
         for root, dirs, files in os.walk(music_dir, topdown=True):
             for name in files:
                 print(os.path.join(root, name))
+                print(tags_util.get_tags(os.path.join(root, name)))
+                #print(type(tags_util.get_tags(os.path.join(root, name))))
+            '''
             for name in dirs:
                 print(os.path.join(root, name))
-
+            '''
 
         self.logger.info('Calculating current state finished')
 
