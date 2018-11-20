@@ -1,5 +1,6 @@
 import logging
 
+
 def create_logger(logger_name):
 
     # create logger
@@ -20,13 +21,3 @@ def create_logger(logger_name):
     logger.addHandler(ch)
 
     return logger
-
-if __name__ == '__main__':
-    logger = create_logger('logger_util')
-    # 'application' code
-    logger.debug('debug message')
-    logger.info('info message')
-    #logger.warn('warn message')
-    logger.warning('warning message')
-    logger.error('error message')
-    logger.critical('critical message')
