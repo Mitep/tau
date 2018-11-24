@@ -21,7 +21,13 @@ logger = create_logger('tau_logger')
     help='Config file. If not set it will be loaded default config.')
 def start_worker(worker, config):
 
-    config_data = load_config(config)
+    config_data, msg = load_config(config)
+
+    if config_data is None:
+        logger.error(msg)
+        return
+
+    logger.info(msg)
 
     running_worker = None
 
@@ -38,14 +44,13 @@ def start_worker(worker, config):
         logger.error('No worker type ' + type)
         return
 
-    logger.info(f'Starting worker for {worker} state')
-    logger.info(f'Config filepath is: {config}')
+    logger.info(f'Starting worker for {worker} state.')
 
     running_worker.run(config_data)
 
 
 if __name__ == '__main__':
 
-    logger.info('Starting TAU')
+    logger.info('Starting TAU ...')
 
     start_worker()
