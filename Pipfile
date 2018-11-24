@@ -8,6 +8,7 @@ logger = "*"
 mutagen = "*"
 pyyaml = "*"
 phrydy = "*"
+click = "*"
 
 [dev-packages]
 pylint = "*"
