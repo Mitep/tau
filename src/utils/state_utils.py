@@ -43,7 +43,7 @@ def add_timestamp(state_filepath):
 
 def save_state(song_state, path):
 
-    f = open(path, 'a+')
+    f = open(path, 'a+', encoding='utf-8')
 
     filepath = song_state['filepath']
     # - filename:
