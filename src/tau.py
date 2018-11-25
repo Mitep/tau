@@ -7,18 +7,20 @@ from utils.config_utils import load_config
 from utils.logger_utils import create_logger
 
 
-logger = create_logger('tau_logger')
+logger = create_logger("tau_logger")
 
 
 @click.command()
 @click.option(
-    '--worker',
-    default='current',
-    help='Worker type. Possible types: current[default], new, apply.')
+    "--worker",
+    default="current",
+    help="Worker type. Possible types: current[default], new, apply.",
+)
 @click.option(
-    '--config',
-    default='./config/config.yaml',
-    help='Config file. If not set it will be loaded default config.')
+    "--config",
+    default="./config/config.yaml",
+    help="Config file. If not set it will be loaded default config.",
+)
 def start_worker(worker, config):
 
     config_data, msg = load_config(config)
@@ -31,26 +33,26 @@ def start_worker(worker, config):
 
     running_worker = None
 
-    if worker == 'current':
+    if worker == "current":
         running_worker = CurrentState(worker)
 
-    elif worker == 'new':
+    elif worker == "new":
         running_worker = NewState(worker)
 
-    elif worker == 'apply':
+    elif worker == "apply":
         running_worker = ApplyState(worker)
 
     else:
-        logger.error('No worker type ' + type)
+        logger.error("No worker type " + type)
         return
 
-    logger.info(f'Starting worker for {worker} state.')
+    logger.info(f"Starting worker for {worker} state.")
 
     running_worker.run(config_data)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    logger.info('Starting TAU ...')
+    logger.info("Starting TAU ...")
 
     start_worker()
