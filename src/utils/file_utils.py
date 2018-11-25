@@ -1,20 +1,22 @@
 """
 Utils for working with files and directories.
 """
-import os 
+
+import os
 
 
 def get_dirs(root_dir, recursive=True):
     """
     Return all directories for given path
     """
+
     ret_dirs = []
-    
-    for root, dirs, files in os.walk(root_dir, topdown=True):
-        
+
+    for root, dirs, _ in os.walk(root_dir, topdown=True):
+
         for name in dirs:
             ret_dirs.append(os.path.join(root, name))
-        
+
         if not recursive:
             break
 
@@ -25,17 +27,17 @@ def get_files(root_dir, recursive=True):
     """
     Return all files for given directory
     """
-        
+
     ret_files = []
 
-    for root, dirs, files in os.walk(root_dir, topdown=True):
+    for root, _, files in os.walk(root_dir, topdown=True):
 
         for name in files:
             ret_files.append(os.path.join(root, name))
-        
+
         if not recursive:
             break
-        
+
     return ret_files
 
 
@@ -52,7 +54,7 @@ def filter_ext(exts=[]):
 
             files = function(*args, **kwargs)
             return [file for file in files if file.split('.')[-1] in exts]
-        
+
         return wrapper
 
     return decorator
