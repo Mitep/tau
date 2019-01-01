@@ -1,3 +1,4 @@
 # ignore vscode files
-.vscode/
+.vscode/*
+output/*
 config.yaml
