@@ -1,9 +1,9 @@
 import os
 
 
-audio_types = ["mp3", "flac", "aac"]
-image_types = ["jpg", "jpeg", "png"]
-repr_types = ["yaml", "xml", "json"]
+audio_types = ("mp3", "flac", "aac")
+image_types = ("jpg", "jpeg", "png")
+repr_types = ("yaml", "xml", "json")
 
 
 class Node:
