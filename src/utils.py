@@ -23,41 +23,48 @@ def config(filepath):
         return yaml.load(f)
 
 
-def logger(name):
-    # create logger
-    logger = logging.getLogger(name)
-    logger.setLevel(logging.DEBUG)
+class Logger:
 
-    if logger.hasHandlers:
+    loggers = {}
+
+    def get(name):
+
+        if name in Logger.loggers.keys():
+            return Logger.loggers[name]
+
+        # create logger
+        logger = logging.getLogger(name)
+
+        logger.setLevel(logging.DEBUG)
+
+        # create console handler and set level to debug
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.DEBUG)
+
+        log_dir = f"{os.getcwd()}{os.sep}log"
+        print(log_dir)
+        try:
+            os.makedirs(log_dir)
+        except OSError:
+            print(f"Log dir exist.")
+
+        # create file handler which logs even debug messages
+        fh = logging.FileHandler(f"{log_dir}{os.sep}{date()}_{name}.log")
+        fh.setLevel(logging.DEBUG)
+
+        # create formatter
+        formatter = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        )
+
+        ch.setFormatter(formatter)
+        fh.setFormatter(formatter)
+
+        logger.addHandler(ch)
+        logger.addHandler(fh)
+
+        Logger.loggers[name] = logger
         return logger
-
-    # create console handler and set level to debug
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.DEBUG)
-
-    log_dir = f"{os.getcwd()}{os.sep}log"
-    print(log_dir)
-    try:
-        os.makedirs(log_dir)
-    except OSError:
-        print(f"Log dir exist.")
-
-    # create file handler which logs even debug messages
-    fh = logging.FileHandler(f"{log_dir}{os.sep}{date()}{name}.log")
-    fh.setLevel(logging.DEBUG)
-
-    # create formatter
-    formatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
-
-    ch.setFormatter(formatter)
-    fh.setFormatter(formatter)
-
-    logger.addHandler(ch)
-    logger.addHandler(fh)
-
-    return logger
 
 
 def list_dir(path):
