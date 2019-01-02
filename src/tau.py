@@ -1,58 +1,38 @@
-import click
+import sys
 
-from workers.current_state import CurrentState
-from workers.new_state import NewState
-from workers.apply_state import ApplyState
-from utils.config_utils import load_config
-from utils.logger_utils import create_logger
+import core
+import utils
+import cli
 
 
-logger = create_logger("tau_logger")
+def flow(flow_path):
+    print("running flow")
 
 
-@click.command()
-@click.option(
-    "--worker",
-    default="current",
-    help="Worker type. Possible types: current[default], new, apply.",
-)
-@click.option(
-    "--config",
-    default="./config/config.yaml",
-    help="Config file. If not set it will be loaded default config.",
-)
-def start_worker(worker, config):
+def tau():
 
-    config_data, msg = load_config(config)
+    logger = utils.Logger.get("tau")
 
-    if config_data is None:
-        logger.error(msg)
+    cli.welcome()
+
+    if len(sys.argv) > 1:
+        flow(sys.argv[1])
         return
 
-    logger.info(msg)
+    functions = core.Functions()
 
-    running_worker = None
+    try:
+        while True:
+            work = cli.choose_work()
 
-    if worker == "current":
-        running_worker = CurrentState(worker)
-
-    elif worker == "new":
-        running_worker = NewState(worker)
-
-    elif worker == "apply":
-        running_worker = ApplyState(worker)
-
-    else:
-        logger.error("No worker type " + type)
-        return
-
-    logger.info(f"Starting worker for {worker} state.")
-
-    running_worker.run(config_data)
+            if work >= 0 and work <= 4:
+                functions.functions[work]()
+            else:
+                logger.error(f"Tau does'n contain {work} function.")
+    except KeyboardInterrupt:
+        logger.info("Exiting Tau...")
 
 
 if __name__ == "__main__":
 
-    logger.info("Starting TAU ...")
-
-    start_worker()
+    tau()

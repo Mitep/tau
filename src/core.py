@@ -1,5 +1,7 @@
 import os
 
+import utils
+
 
 audio_types = ("mp3", "flac", "aac")
 image_types = ("jpg", "jpeg", "png")
@@ -67,3 +69,28 @@ class ImageFile(Node):
     def __str__(self):
         if self.repr_type == "yaml":
             return f"{self.path}"
+
+
+class Functions:
+
+    def __init__(self):
+        self.logger = utils.Logger.get(__name__)
+        self.functions = {
+            0: self.scan,
+            1: self.estimate,
+            2: self.update,
+            3: self.flow
+        }
+        self.logger.info("Core initialized")
+
+    def scan(self):
+        self.logger.info("Scaning started...")
+
+    def estimate(self):
+        self.logger.info("Estimation started...")
+
+    def update(self):
+        self.logger.info("Update started...")
+
+    def flow(self):
+        self.logger.info("Runnig flow...")
