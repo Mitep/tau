@@ -6,6 +6,14 @@ When you accumulate your music directory with files from different sources, over
 
 Here is my solution to make formatting more easier and automatic.
 
+### App structure
+
+* tau - Main module. Controls app flow.
+* core - Module that contains functions of app.
+* estimate - Functions for estimating songs metadata.
+* api - Functions that returns data from given sites.
+* utils - Utils.
+
 ## How it works
 
 State of directory is represented with yaml notation.
