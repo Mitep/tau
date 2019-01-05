@@ -1,34 +1,29 @@
-import sys
-
-import core
 import utils
-import cli
-
-
-def flow(flow_path):
-    print("running flow")
+import services as serv
+import cli as cli_util
 
 
 def tau():
 
     logger = utils.Logger.get("tau")
+    logger.info("Starting TAU...")
 
+    cli = cli_util.CLI()
     cli.welcome()
 
-    if len(sys.argv) > 1:
-        flow(sys.argv[1])
-        return
-
-    functions = core.Functions()
+    services = serv.Services()
 
     try:
         while True:
-            work = cli.choose_work()
 
-            if work >= 0 and work <= 4:
-                functions.functions[work]()
+            service = cli.choose()
+
+            if service >= 0:
+                logger.info(f"Running {service} service")
+                services.run(service)
             else:
-                logger.error(f"Tau does'n contain {work} function.")
+                logger.info("Exiting tau...")
+                return
     except KeyboardInterrupt:
         logger.info("Exiting Tau...")
 
