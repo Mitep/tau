@@ -6,8 +6,24 @@ Used for arg parsing and calling tau services
 import sys
 
 import common
-# import core
-# import extra
+import core
+
+
+def argParser(args):
+    """
+    Creating dict out of given args from command line
+    """
+
+    argDict = {}
+
+    for i, x in enumerate(args):
+        if x.startswith("-"):
+            argDict[x[1:]] = args[i + 1]
+        if x.startswith("--"):
+            key, val = x[2:].split("=", 1)
+            argDict[key] = val
+
+    return argDict
 
 
 def runner(params):
@@ -20,6 +36,23 @@ def runner(params):
     logger.info("Running service")
     logger.info(f"Input parameters: {params}")
 
+    if "start" not in params.keys():
+        logger.error(
+            "start param not found.",
+            "tau must know which service to start",
+            "exiting...")
+        raise AttributeError
+
+    # if start was something like
+    # encode->edit->estimate
+    # then it runs service one by one
+    services = params["start"].split("->")
+
+    del services["start"]
+
+    for service in services:
+        core.run(service, params)
+
 
 def main():
     """
@@ -31,12 +64,14 @@ def main():
 
     logger.info("Starting tau")
 
-    args = sys.argv[1:]
+    params = argParser(sys.argv[1:])
 
     try:
         while True:
-            runner(args)
+            runner(params)
     except KeyboardInterrupt:
+        logger.info("Exiting tau...")
+    except AttributeError:
         logger.info("Exiting tau...")
 
 
