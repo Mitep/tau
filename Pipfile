@@ -13,7 +13,6 @@ click = "*"
 [dev-packages]
 pylint = "*"
 "flake8" = "*"
-black = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"
