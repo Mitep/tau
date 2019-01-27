@@ -1,2 +1,5 @@
 # ignore vscode files
-.vscode/
+.vscode/*
+output/*
+log/*
+config.yaml
