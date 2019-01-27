@@ -17,7 +17,7 @@ def argParser(args):
     argDict = {}
 
     for i, x in enumerate(args):
-        if x.startswith("-"):
+        if x[0:1] == "-" and i < len(args):
             argDict[x[1:]] = args[i + 1]
         if x.startswith("--"):
             key, val = x[2:].split("=", 1)
@@ -35,6 +35,10 @@ def runner(params):
 
     logger.info("Running service")
     logger.info(f"Input parameters: {params}")
+
+    if "help" in params.keys():
+        core.help()
+        return
 
     if "start" not in params.keys():
         logger.error(
