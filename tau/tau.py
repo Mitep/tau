@@ -6,56 +6,27 @@ Used for arg parsing and calling tau services
 import sys
 
 import common
-import core
+import services
 
 
-def argParser(args):
+def runner(args):
     """
-    Creating dict out of given args from command line
-    """
-
-    argDict = {}
-
-    for i, x in enumerate(args):
-        if x[0:1] == "-" and i < len(args):
-            argDict[x[1:]] = args[i + 1]
-        if x.startswith("--"):
-            key, val = x[2:].split("=", 1)
-            argDict[key] = val
-
-    return argDict
-
-
-def runner(params):
-    """
-    Run services based on given parameters
+    Run services based on given arguments
     """
 
     logger = common.Logger.get()
 
-    logger.info("Running service")
-    logger.info(f"Input parameters: {params}")
+    logger.info("Parsing arguments: {args}")
 
-    if "help" in params.keys():
-        core.help()
-        return
+    # this should be parsed from config file and cli args
+    cfgDict = {"namae": "John", "age": "23"}
 
-    if "start" not in params.keys():
-        logger.error(
-            "start param not found.",
-            "tau must know which service to start",
-            "exiting...")
-        raise AttributeError
-
-    # if start was something like
-    # encode->edit->estimate
-    # then it runs service one by one
-    services = params["start"].split("->")
-
-    del services["start"]
-
-    for service in services:
-        core.run(service, params)
+    # read from config or command line which service to call
+    # this is just test to see if services are working
+    
+    funToRun = getattr(services, "testService")
+    funToRun(cfgDict)
+    # services.service.registered["testService2"](cfgDict)
 
 
 def main():
@@ -68,15 +39,12 @@ def main():
 
     logger.info("Starting tau")
 
-    params = argParser(sys.argv[1:])
-
     try:
-        while True:
-            runner(params)
+        runner(sys.argv[1:])
     except KeyboardInterrupt:
-        logger.info("Exiting tau...")
-    except AttributeError:
-        logger.info("Exiting tau...")
+        logger.info("Keyboard interrupt")
+
+    logger.info("Exiting tau...")
 
 
 if __name__ == "__main__":
