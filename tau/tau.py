@@ -7,6 +7,7 @@ import sys
 
 import common
 import services
+import commands
 
 
 def runner(args):
@@ -38,6 +39,11 @@ def main():
     logger = common.Logger.get()
 
     logger.info("Starting tau")
+
+    '''
+        just testing click
+    '''
+    commands.hello()
 
     try:
         runner(sys.argv[1:])

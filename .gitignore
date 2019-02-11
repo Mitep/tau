@@ -3,3 +3,7 @@
 output/*
 log/*
 config.yaml
+/tau/log/*
+*/log/*
+/tau/__pycache__/*
+/tau/.vscode/*
